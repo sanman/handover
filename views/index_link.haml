@@ -1,0 +1,19 @@
+%h3 All Important Links:
+- unless @links.empty?
+  %ul
+    - @links.each do |link|
+      %li <a href="/link/#{link.id}">#{link.title}</a>: <a href="http://#{link.name}">#{link.name}</a>      
+- else
+  %p No Links Yet!
+
+
+
+
+%form{:action => "/link/create", :method => "POST"}
+  %fieldset
+    %ol
+      %label{:for => "title"} Title:
+      %input{:type => "text", :name => "title", :class => "text"}
+      %label{:for => "name"} URL:
+      %input{:type => "text", :name => "name", :class => "text"}
+  %input{:type => "submit", :value => "Add Link", :class => "button"}

@@ -1,0 +1,6 @@
+%form{:action => "/task/#{@task.id}", :method => "post"}
+  %input{:name => "_method", :type => "hidden", :value => "put"}/
+  %input#name{:name => "name", :type => "text", :value => @task.name}/
+  <input id="completed" name="completed" type="checkbox" value="done" #{@task.completed_at ? "checked" : ""}/>
+  %input#task_submit{:name => "commit", :type => "submit", :value => "Update"}/
+%a{:href => "/task/#{@task.id}/delete"} Delete this task
