@@ -6,18 +6,13 @@ require 'sinatra/reloader'
 require 'dm-core'
 require 'dm-validations'
 require 'dm-timestamps'
-require 'rack-flash'
-require 'pry'
-#require File.expand_path(File.dirname(__FILE__) + '/link.rb'
-#require File.dirname(__FILE__) + '/../lib/rackflash.rb'
-#require File.expand_path(File.dirname(__FILE__) + '/lib/rack-flash.rb')
-
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/development.db")
 
-register Sinatra::Reloader
+#register Sinatra::Reloader
+set :environment, :production
 
-class Task 
+class Task
 
   include DataMapper::Resource
   property :id,      Serial
@@ -120,9 +115,9 @@ get '/links' do
   haml :index_link
 end
 
-# create new 
+# create new
 post '/link/create' do
-  
+
 
   link  = Link.new(:title => params[:title], :name => params[:name])
   #link.name << params[:name]

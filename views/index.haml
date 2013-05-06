@@ -1,14 +1,16 @@
-%h3 Tasks List:
+%h3 <i class="icon-tasks"></i> Tasks List:
+
 - unless @tasks.empty?
   %ul
     - @tasks.each do |task|
       <li #{"class=\"completed\"" if task.completed?}>
-      \#{task.link}
+      <span class="label label-default"><i class="icon-leaf"></i></span> <strong>#{task.link}</strong>
 - else
   %p No Tasks!
 
 
+%form{:action => "/task/create", :method => "POST", :class=>"form-inline"}
+  %input#name{:name => "name", :type => "text", :class=>"input-large"}/
+  %input{:type => "submit", :value => "Add Task!", :class => "btn btn-success"}/
 
-%form{:action => "/task/create", :method => "POST"}
-  %input#name{:name => "name", :type => "text"}/
-  %input{:type => "submit", :value => "Add Task!"}/
+

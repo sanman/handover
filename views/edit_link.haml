@@ -1,13 +1,6 @@
-
-%form{:action => "/link/#{@link.id}", :method => "post"}
+%form{:action => "/link/#{@link.id}", :method => "post",  :class=>"form-inline"}
   %input{:name => "_method", :type => "hidden", :value => "put"}/
-  %fieldset
-    %ol
-      %label{:for => "title"} Title:
-      %input{:type => "text", :name => "title", :class => "text", :value => @link.title}
-      %label{:for => "name"} URL:
-      %input{:type => "text", :name => "name", :class => "text", :value => @link.name}
-  %input{:name => "commit_link", :type => "submit", :value => "Update Link", :class => "button"}
-  %fieldset
-    %ol
-  %a{:href => "/link/#{@link.id}/delete"} Delete this link
+  %input{:type => "text", :name => "title", :class => "input-small", :value=>@link.title}
+  %input{:type => "text", :name => "name", :class => "input-xxlarge", :value=>@link.name}
+  %input{:name => "commit_link", :type => "submit", :value => "Update Link", :class => "btn btn-success"}
+%a{:href => "/link/#{@link.id}/delete"} Delete this link

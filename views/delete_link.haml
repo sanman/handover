@@ -1,11 +1,10 @@
-%h3
+%h2
+  <i class="icon-tag"></i>
   = @link.title
   %h3
-    %h4
-      Are you sure you want to delete this link?
-      %h4
-        %form{:action => "/link/#{@link.id}", :method => "post"}
-          %input{:name => "_method", :type => "hidden", :value => "delete"}/
-          %input{:type => "submit", :value => "Delete"}/
-          or
-          %a{:href => "/links"} Cancel
+    Are you sure you want to delete this link?
+    %h5
+      %form{:action => "/link/#{@link.id}", :method => "post"}
+        %input{:name => "_method", :type => "hidden", :value => "delete"}
+        %input{:type => "submit", :value => "Delete", :class => "btn btn-danger"}
+        %a{:href => "/links", :class=>"btn btn-success" } Cancel
