@@ -6,11 +6,13 @@ require 'sinatra/reloader'
 require 'dm-core'
 require 'dm-validations'
 require 'dm-timestamps'
+require 'sinatra/flash'
+enable :sessions
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/development.db")
 
-#register Sinatra::Reloader
-set :environment, :production
+register Sinatra::Reloader
+#set :environment, :production
 
 class Task
 
@@ -68,9 +70,11 @@ post '/task/create' do
   task = Task.new(:name => params[:name])
   if task.save
     status 201
+    flash[:success] = "Task created successfully."
     redirect '/'
   else
     status 412
+    flash[:error] = "Task failed."
     redirect '/'
   end
 end
@@ -88,9 +92,11 @@ put '/task/:id' do
   task.name = (params[:name])
   if task.save
     status 201
+    flash[:success] = "Task updated successfully."
     redirect '/'
   else
     status 412
+    flash[:error] = "Task failed."
     redirect '/'
   end
 end
@@ -104,6 +110,7 @@ end
 # delete task
 delete '/task/:id' do
   Task.get(params[:id]).destroy
+  flash[:error] = "Task deleted successfully."
   redirect '/'
 end
 

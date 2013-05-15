@@ -5,6 +5,7 @@ gem "sinatra"
 gem "haml"
 gem "data_mapper"
 gem "sinatra-reloader"
+gem "sinatra-flash"
 
 
 # The rerun command restarts the app if your files change
