@@ -70,7 +70,7 @@ post '/task/create' do
   task = Task.new(:name => params[:name])
   if task.save
     status 201
-    flash[:success] = "Task created successfully."
+    flash[:success] = "New task created successfully."
     redirect '/'
   else
     status 412
@@ -96,7 +96,7 @@ put '/task/:id' do
     redirect '/'
   else
     status 412
-    flash[:error] = "Task failed."
+    flash[:error] = "Failed to update the task."
     redirect '/'
   end
 end
@@ -124,15 +124,14 @@ end
 
 # create new
 post '/link/create' do
-
-
   link  = Link.new(:title => params[:title], :name => params[:name])
-  #link.name << params[:name]
   if link.save
     status 201
+    flash[:success] = "New link for #{link.title} created successfully."
     redirect '/links'
   else
     status 412
+    flash[:error] = "Failed to create new link."
     redirect    end
 end
 
@@ -150,9 +149,11 @@ put '/link/:id' do
   link.name = (params[:name])
   if link.save
     status 201
+    flash[:success] = "Link for #{link.title} updated successfully."
     redirect '/links'
   else
     status 412
+    flash[:error] = "Failed to update link."
     redirect '/'
   end
 end
@@ -166,6 +167,7 @@ end
 # delete task
 delete '/link/:id' do
   Link.get(params[:id]).destroy
+  flash[:error] = "Link deleted successfully."
   redirect '/links'
 end
 
